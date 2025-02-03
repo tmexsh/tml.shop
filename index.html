@@ -153,7 +153,21 @@
             text-transform: uppercase;
         }
 
-        /* Product Grid */
+        .cta-button {
+            background: var(--neon-accent);
+            color: var(--primary-black);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Shop Page */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -167,16 +181,25 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         .product-image {
             height: 500px;
-            background: var(--light-gray);
+            background-size: cover;
+            background-position: center;
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover .product-image {
-            transform: scale(1.03);
+        .product-info {
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--neon-accent);
+            font-size: 1.2rem;
         }
 
         /* Product Detail Page */
@@ -205,36 +228,103 @@
         }
 
         .size-option.selected {
-            background: var(--primary-black);
+            background: var(--neon-accent);
             color: var(--pure-white);
+            border-color: var(--neon-accent);
         }
 
-        /* Checkout Page */
-        .checkout-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* About Page */
-        .about-hero {
-            height: 60vh;
-            background: var(--primary-black);
-            color: var(--pure-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Button Styles */
+        .add-to-cart, .buy-now {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 0.5rem 0;
+            display: block;
             text-align: center;
         }
 
-        .brand-story {
-            max-width: 800px;
-            margin: 4rem auto;
-            line-height: 1.8;
-            padding: 0 2rem;
+        .add-to-cart {
+            background: var(--primary-black);
+            color: var(--pure-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-to-cart:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .buy-now {
+            background: var(--neon-accent);
+            color: var(--primary-black);
+            border: 2px solid var(--primary-black);
+            position: relative;
+        }
+
+        .buy-now:hover {
+            background: #ff45f2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,16,240,0.3);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: var(--pure-white);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--hover-gray);
+        }
+
+        .checkout-btn {
+            background: var(--primary-black);
+            color: var(--pure-white);
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .cart-total {
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
         /* Mobile Styles */
@@ -281,6 +371,14 @@
             .hero-content h1 {
                 font-size: 3rem;
             }
+
+            .product-image {
+                height: 400px;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -319,9 +417,32 @@
                 <a href="#shop" class="cta-button">Explore Collection</a>
             </div>
         </div>
+    </section>
 
+    <!-- Shop Page -->
+    <section id="shop" class="page">
         <div class="product-grid">
-            <!-- Product cards will be dynamically inserted here -->
+            <div class="product-card" data-product-id="1">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="product-info">
+                    <h3>Oversized Logo Tee</h3>
+                    <p class="price">$49.99</p>
+                </div>
+            </div>
+            <div class="product-card" data-product-id="2">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="product-info">
+                    <h3>Distressed Denim Jacket</h3>
+                    <p class="price">$129.99</p>
+                </div>
+            </div>
+            <div class="product-card" data-product-id="3">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="product-info">
+                    <h3>Jogger Pants</h3>
+                    <p class="price">$79.99</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -333,14 +454,9 @@
             </div>
             <div class="product-info">
                 <h1 class="product-title">Essential Oversized Tee</h1>
-                <div class="size-selector">
-                    <div class="size-option">S</div>
-                    <div class="size-option">M</div>
-                    <div class="size-option">L</div>
-                    <div class="size-option">XL</div>
-                </div>
+                <div class="size-selector"></div>
                 <div class="product-actions">
-                    <button class="add-to-cart">Add to Cart - $49.99</button>
+                    <button class="add-to-cart">Add to Cart - $0.00</button>
                     <button class="buy-now">Buy Now</button>
                 </div>
             </div>
@@ -366,9 +482,8 @@
             </form>
             <div class="order-summary">
                 <h2>Your Order</h2>
-                <div class="total-amount">
-                    <h3>Total: $0.00</h3>
-                </div>
+                <div class="cart-items"></div>
+                <div class="cart-total">Total: $0.00</div>
             </div>
         </div>
     </section>
@@ -380,61 +495,224 @@
         </div>
         <div class="brand-story">
             <h2>Our Story</h2>
-            <p>TML emerged from the underground streetwear scene in 2024...</p>
+            <p>TML emerged from the underground streetwear scene in 2024, born from a passion for authentic self-expression through fashion. We combine urban edge with premium comfort, creating pieces that stand out while feeling like a second skin.</p>
         </div>
     </section>
 
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <i class="fas fa-times close-cart"></i>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-total">Total: $0.00</div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
     <script>
-        // Navigation System
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: 'Oversized Logo Tee',
+                price: 49.99,
+                image: 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                sizes: ['S', 'M', 'L', 'XL']
+            },
+            {
+                id: 2,
+                name: 'Distressed Denim Jacket',
+                price: 129.99,
+                image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                sizes: ['S', 'M', 'L']
+            },
+            {
+                id: 3,
+                name: 'Jogger Pants',
+                price: 79.99,
+                image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                sizes: ['M', 'L', 'XL']
+            }
+        ];
+
+        let currentProduct = null;
+        let cart = JSON.parse(localStorage.getItem('tml-cart')) || [];
+
+        // Cart System
+        function updateCartDisplay() {
+            const cartItems = document.querySelectorAll('.cart-items');
+            const cartTotals = document.querySelectorAll('.cart-total');
+            let total = 0;
+
+            cartItems.forEach(container => {
+                container.innerHTML = '';
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    container.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-image" style="
+                                background-image: url('${item.image}');
+                                width: 80px;
+                                height: 80px;
+                                background-size: cover;
+                            "></div>
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <p>Size: ${item.size}</p>
+                                <p>$${item.price.toFixed(2)}</p>
+                                <button onclick="removeFromCart(${index})">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            cartTotals.forEach(totalElement => {
+                totalElement.innerHTML = `Total: $${total.toFixed(2)}`;
+            });
+
+            document.querySelector('.cart-count').textContent = cart.length;
+            localStorage.setItem('tml-cart', JSON.stringify(cart));
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        // Product Page
+        function loadProduct(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            if (!currentProduct) return;
+
+            document.querySelector('.product-title').textContent = currentProduct.name;
+            document.querySelector('.product-gallery .product-image').style.backgroundImage = 
+                `url('${currentProduct.image}')`;
+            document.querySelector('.add-to-cart').textContent = 
+                `Add to Cart - $${currentProduct.price.toFixed(2)}`;
+
+            const sizeContainer = document.querySelector('.size-selector');
+            sizeContainer.innerHTML = currentProduct.sizes
+                .map(size => `<div class="size-option">${size}</div>`)
+                .join('');
+
+            initSizeSelection();
+            initProductCart();
+        }
+
+        function initSizeSelection() {
+            document.querySelectorAll('.size-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.size-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+        }
+
+        function initProductCart() {
+            const addToCartBtn = document.querySelector('.add-to-cart');
+            const buyNowBtn = document.querySelector('.buy-now');
+
+            addToCartBtn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedSize = document.querySelector('.size-option.selected');
+                
+                if (!selectedSize) {
+                    alert('Please select a size');
+                    return;
+                }
+
+                cart.push({
+                    ...currentProduct,
+                    size: selectedSize.textContent
+                });
+
+                updateCartDisplay();
+                document.querySelector('.cart-sidebar').classList.add('active');
+            });
+
+            buyNowBtn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                addToCartBtn.click();
+                showPage('checkout');
+                document.querySelector('.cart-sidebar').classList.remove('active');
+            });
+        }
+
+        // Navigation
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                if (pageId === 'checkout') updateCartDisplay();
+            }
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${pageId}`) {
+                    link.classList.add('active');
+                }
+            });
         }
 
-        // Mobile Menu Toggle
-        document.querySelector('.menu-toggle').addEventListener('click', () => {
+        // Event Listeners
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const productId = parseInt(card.dataset.productId);
+                loadProduct(productId);
+                showPage('product');
+            });
+        });
+
+        document.querySelector('.menu-toggle').addEventListener('click', (e) => {
+            e.stopPropagation();
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
-        // Navigation Click Handlers
+        document.querySelector('.cart-icon').addEventListener('click', () => {
+            document.querySelector('.cart-sidebar').classList.add('active');
+        });
+
+        document.querySelector('.close-cart').addEventListener('click', () => {
+            document.querySelector('.cart-sidebar').classList.remove('active');
+        });
+
+        document.querySelector('.checkout-btn').addEventListener('click', () => {
+            showPage('checkout');
+            document.querySelector('.cart-sidebar').classList.remove('active');
+        });
+
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const pageId = this.getAttribute('href').substring(1);
                 showPage(pageId);
-                
-                document.querySelectorAll('.nav-links a').forEach(link => 
-                    link.classList.remove('active'));
-                this.classList.add('active');
-                
                 document.querySelector('.nav-links').classList.remove('active');
             });
         });
 
-        // Size Selection
-        document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.size-option').forEach(opt => 
-                    opt.classList.remove('selected'));
-                this.classList.add('selected');
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.product-card').forEach((card, index) => {
+                card.dataset.productId = index + 1;
             });
+            updateCartDisplay();
+            showPage('home');
         });
 
-        // Cart System
-        let cart = JSON.parse(localStorage.getItem('tml-cart')) || [];
-        const cartCount = document.querySelector('.cart-count');
-
-        function updateCartCount() {
-            cartCount.textContent = cart.length;
-        }
-
-        // Initialize
-        updateCartCount();
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar')) {
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
-
 
